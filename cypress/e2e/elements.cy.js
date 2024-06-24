@@ -25,7 +25,7 @@ describe('Work with basic elements', () => {
         cy.get('#resultado').should('have.text', 'Voltou!')
     });
 
-    it.only('TextFields', () => {
+    it('TextFields', () => {
         cy.get('#formNome').type('Cypress Test')
         cy.get('#formNome').should('have.value', 'Cypress Test') //have.value para verificar o valor do input
         cy.get('#elementosForm\\:sugestoes').type('Cypress Test')
@@ -37,4 +37,30 @@ describe('Work with basic elements', () => {
         cy.get('#elementosForm\\:sugestoes').clear().type('Error{selectall}acerto', {delay: 100})
         cy.get('#elementosForm\\:sugestoes').should('have.value', 'acerto')
     });
+
+    it('RadioButton', () => {
+        cy.get('#formSexoFem').click().should('be.checked')
+        cy.get('#formSexoMasc').should('not.be.checked')
+        cy.get('[name=formSexo]').should('have.length', 2) // busar a propriedade e colocar nome do input com '[]' para verificar o numero de radio buttons
+    });
+
+    it('Checkbox', () => {
+        cy.get('#formComidaPizza').click().should('be.checked')
+        cy.get('[name="formComidaFavorita"]').click({multiple: true})
+        cy.get('#formComidaPizza').should('not.be.checked')
+        cy.get('#formComidaVegetariana').should('be.checked')
+    });
+
+    it('Combo', () => {
+        cy.get('[data-test="dataEscolaridade"]').select('2o grau completo').should('have.value', '2graucomp')
+        cy.get('[data-test="dataEscolaridade"]').select('1graucomp').should('have.value', '1graucomp') //o select vai funcionar com seletor option pegando a o value do html
+        //TODO validar as ações do combo
+    });
+
+    it('Combo Multiplo', () => {
+        cy.get('[data-testid="dataEsportes"]').select(['natacao', 'Corrida', 'nada'])
+         //TODO validar as ações selecionaddas do combo multiplo
+    });
+
+    
 });

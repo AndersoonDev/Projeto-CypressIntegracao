@@ -10,11 +10,11 @@ describe('Cypress Basics', () => {
        cy.title().should('be.equal', 'Campo de Treinamento') //.debug()
        cy.title().should('contain', 'Campo de Treinamento')
        cy.title().should('be.equal', 'Campo de Treinamento').should('contain', 'Campo')       
-       cy.title().should('be.equal', 'Campo de Treinamento').and('contain', 'Campo')
+       cy.title().should('be.equal', 'Camelemepo de Treinamento').and('contain', 'Campo')
 
     });
 
-    it('Should find and interact with an element', () => {
+    it('Should find and interact with an elsement', () => {
         cy.visit('https://wcaquino.me/cypress/componentes.html');
 
         cy.get('#buttonSimple').click().should('have.value', 'Obrigado!')
