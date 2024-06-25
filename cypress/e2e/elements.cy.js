@@ -55,12 +55,32 @@ describe('Work with basic elements', () => {
         cy.get('[data-test="dataEscolaridade"]').select('2o grau completo').should('have.value', '2graucomp')
         cy.get('[data-test="dataEscolaridade"]').select('1graucomp').should('have.value', '1graucomp') //o select vai funcionar com seletor option pegando a o value do html
         //TODO validar as ações do combo
+
+        cy.get('[data-test="dataEscolaridade"] option').should('have.length', 8)
+        cy.get('[data-test="dataEscolaridade"] option').then(arr => {
+            const values = []
+            arr.each(function(){
+                values.push(this.innerHTML)
+            })
+            expect(values).to.include.members(['Superior', 'Mestrado', 'Doutorado'])
+        })
     });
 
-    it('Combo Multiplo', () => {
+    it.only('Combo Multiplo', () => {
         cy.get('[data-testid="dataEsportes"]').select(['natacao', 'Corrida', 'nada'])
-         //TODO validar as ações selecionaddas do combo multiplo
+        cy.get('[data-testid="dataEsportes"]').then($el => {
+            expect($el.val()).to.be.deep.eql(['natacao', 'Corrida', 'nada'])
+            expect($el.val()).to.have.length(3)
+        })
+        cy.get('[data-testid="dataEsportes"]').invoke('val').should('eql',['natacao', 'Corrida', 'nada'] )
+
+
+
+
     });
+    // it('Test description', () => {
+    //    // code here
+    // });
 
     
 });
