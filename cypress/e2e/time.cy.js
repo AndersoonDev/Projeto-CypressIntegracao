@@ -21,10 +21,10 @@ describe('Dinamic test', () => {
 
     it.only('Goes to the future', () => {
         cy.get('#buttonTimePassed').click()
-        cy.get('#resultado > span').should('contain','17201')
+        cy.get('#resultado > span').should('contain','17202')
         cy.get('#resultado > span').invoke('text').then((text) => {
             const number = Number(text);
-            expect(number).gt(1720127560543);
+            expect(number).gt(1720227560543);
         });
 
         cy.clock()
@@ -33,11 +33,31 @@ describe('Dinamic test', () => {
             const number = Number(text);
             expect(number).lte(0);
         });
-        cy.wait(1000)
+        cy.tick(1000)
         cy.get('#buttonTimePassed').click()
         cy.get('#resultado > span').invoke('text').then((text) => {
             const number = Number(text);
             expect(number).gte(1000);
+        });
+        cy.tick(5000)
+        cy.get('#buttonTimePassed').click()
+        cy.get('#resultado > span').invoke('text').then((text) => {
+            const number = Number(text);
+            expect(number).gte(5000);
+        });
+
+        cy.tick(15000)
+        cy.get('#buttonTimePassed').click()
+        cy.get('#resultado > span').invoke('text').then((text) => {
+            const number = Number(text);
+            expect(number).gte(15000);
+        });
+
+        cy.tick(5000)
+        cy.get('#buttonTimePassed').click()
+        cy.get('#resultado > span').invoke('text').then((text) => {
+            const number = Number(text);
+            expect(number).gte(5000);
         });
     })
 });
