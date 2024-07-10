@@ -24,9 +24,18 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+
+
 Cypress.Commands.add('clickAlert', (locator, message) => {
         cy.get(locator).click() 
         cy.on('window:alert', msg => {
             expect(msg).to.be.equal(message)        
     })
+  });
+
+Cypress.Commands.add('login', (email, senha) => {
+        cy.get('[data-test="email"]').type('anderson@teste.com.br')
+        cy.get('[data-test="passwd"]').type('teste@teste')
+        cy.get('.btn').click()
+        cy.get('.toast-message').should('contain', 'Bem vindo, Anderson Silva!')
   });
