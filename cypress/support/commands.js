@@ -24,18 +24,24 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-
+import loc from '../support/locators'
 
 Cypress.Commands.add('clickAlert', (locator, message) => {
-        cy.get(locator).click() 
-        cy.on('window:alert', msg => {
-            expect(msg).to.be.equal(message)        
+    cy.get(locator).click() 
+    cy.on('window:alert', msg => {
+        expect(msg).to.be.equal(message)        
     })
-  });
+});
 
 Cypress.Commands.add('login', (email, senha) => {
-        cy.get('[data-test="email"]').type('anderson@teste.com.br')
-        cy.get('[data-test="passwd"]').type('teste@teste')
-        cy.get('.btn').click()
-        cy.get('.toast-message').should('contain', 'Bem vindo, Anderson Silva!')
+    cy.visit('https://barrigareact.wcaquino.me/')   
+    cy.get(loc.LOGIN.USER).type(email)
+    cy.get(loc.LOGIN.PASSWORD).type(senha)
+    cy.get(loc.LOGIN.BTN_LOGIN).click()
+    cy.get(loc.MESSAGE).should('contain', 'Bem vindo, Anderson Silva!')
+});
+
+Cypress.Commands.add('resetApp', () => {
+    cy.get(loc.MENU.SETTINGS).click()
+    cy.get(loc.MENU.RESET).click()
   });
