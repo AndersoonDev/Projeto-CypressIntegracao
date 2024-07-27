@@ -57,6 +57,7 @@ Cypress.Commands.add('getToken', (user, password) => {
         }
     }).its('body.token').should('not.be.empty')
         .then(token => {
+            Cypress.env('token', token) //Token
             return token
         })
 });
@@ -88,3 +89,17 @@ Cypress.Commands.add('getContaByName', (name) => {
     })
 
 });
+
+Cypress.Commands.overwrite('request', (originalFn, ...options) => {
+    if(options.length === 1) {
+        if(Cypress.env('token')) {
+            options[0].headers = {
+            Authorization: `JWT ${Cypress.env('token')}`
+            }
+            // options[0].Authorization = `JWT ${Cypress.env('token')}` outra opção que funciona
+        }
+    }
+    return originalFn(...options)
+}) 
+
+
