@@ -1,62 +1,98 @@
 /// <reference types='cypress' />
 
 import loc from '../../support/locators'
+import build from '../../support/buildEnv'
+import buildEnv from '../../support/buildEnv';
 
 describe('Deve ter a nivel funcional', () => {
-    beforeEach(() => {
-    
-    cy.intercept({
-        method: 'POST',
-        url: '/signin'
-    }, 
-    {   
-        id: 100000,
-        nome: 'usuario falso',
-        token: '123456'
-        
-    }).as('signin')
-    
-    cy.intercept({
-        method: 'GET',
-        url: '/saldo'
-    },
-    [{
-        conta_id: 9999999,
-        conta: 'Carteira',
-        saldo: '100,00',
-    },
-    {
-        conta_id: 9999900,
-        conta: 'Banco',
-        saldo: '1000000,00',
-    }]
-    ).as('saldo')
+    // after(() => {
+    //    cy.clearLocalStorage()
+    // });
+    beforeEach(() => {    
+        buildEnv()
+        cy.login('anderson@teste.com.br', 'teste')
+    });
 
-    cy.login('anderson@teste.com.br', 'teste')
+    beforeEach(() => {
+        cy.get(loc.MENU.HOME).click()
     });
     
     
 
-it.only('Deve inserir uma conta', () => {
-    cy.resetApp()
-    cy.get(loc.MENU.HOME).click()
-    cy.get(loc.MENU.SETTINGS).click()
-    cy.get(loc.MENU.CONTAS).click()
+it('Deve inserir uma conta', () => {   
+
+    cy.intercept({
+        method: 'POST',
+        url: '/contas'
+    },    
+    [
+        {
+            "id": 3,
+            "nome": "Conta de Teste",
+            "visivel": true,
+            "usuario_id": 1
+        }
+    ]
+    ).as('saveContas')
+
+    cy.acessarMenuConta()
+
+    cy.intercept({
+        method: 'GET',
+        url: '/contas'
+    },    
+    [
+        {
+            "id": 1,
+            "nome": "Carteira",
+            "visivel": true,
+            "usuario_id": 1
+        },
+        {
+            "id": 2,
+            "nome": "Banco",
+            "visivel": true,
+            "usuario_id": 1
+        },
+        {
+            "id": 3,
+            "nome": "Conta de Teste",
+            "visivel": true,
+            "usuario_id": 1
+        }
+    ]
+    ).as('contasSave')
+
     cy.get(loc.CONTAS.NOME).type('Conta de teste')
     cy.get(loc.CONTAS.BTN_SALVAR).click()
     cy.get('.toast-success > .toast-message').should('contain', 'Conta inserida com sucesso!')
     });
 
 it('Deve alterar uma conta', () => {
-    cy.get(loc.MENU.SETTINGS).click()
-    cy.get(loc.MENU.CONTAS).click()
-    cy.xpath(loc.CONTAS.XP_BTN_ALTERAR('Conta para alterar')).click()
+
+    cy.intercept({
+        method: 'PUT',
+        url: '/contas/**'
+    },    
+    [
+        {
+            "id": 1,
+            "nome": "Conta alterada",
+            "visivel": true,
+            "usuario_id": 1
+        }
+    ]
+    ).as('contas')
+
+    cy.acessarMenuConta()
+    
+    cy.xpath(loc.CONTAS.XP_BTN_ALTERAR('Carteira')).click()
     cy.get(loc.CONTAS.NOME).clear().type('Conta alterada')
     cy.get(loc.CONTAS.BTN_SALVAR).click()
     cy.get('.toast-message').should('contain', 'Conta atualizada com sucesso!')
     });
 
-    it('Deve criar uma conta com o mesmo nome', () => {
+it('Deve criar uma conta com o mesmo nome', () => {
     cy.get(loc.MENU.SETTINGS).click()
     cy.get(loc.MENU.CONTAS).click()
     cy.get(loc.CONTAS.NOME).type('Conta mesmo nome')
@@ -65,7 +101,7 @@ it('Deve alterar uma conta', () => {
 
     });
 
-    it('Deve inserir uma movimentação', () => {
+it('Deve inserir uma movimentação', () => {
     cy.get(loc.MENU.MOVIMENTACAO).click()
     cy.get(loc.MOVIMENTACAO.DESCRICAO).type('Desc')
     cy.get(loc.MOVIMENTACAO.VALOR).type('123')
@@ -79,7 +115,7 @@ it('Deve alterar uma conta', () => {
     
     });
 
-    it('Deve pegar o saldo da conta', () => {
+it('Deve pegar o saldo da conta', () => {
     cy.get(loc.MENU.HOME).click()
     cy.xpath(loc.SALDO.FN_XP_SALDO_CONTA('Conta para saldo')).should('contain', '534')
     cy.get('[data-test="menu-extrato"]').click()
@@ -93,7 +129,7 @@ it('Deve alterar uma conta', () => {
     cy.xpath('//tr//td[contains(.,"Conta para saldo")]/..//td[contains(.,"4.034,00")]').should('exist')
     });
 
-    it('Deve remover uma movimentação', () => {
+it('Deve remover uma movimentação', () => {
     cy.get(loc.MENU.EXTRATO).click()
     cy.xpath(loc.EXTRATO.FN_XP_REMOVER_ELEMENTO('Movimentacao para exclusao')).click()
     cy.get('.toast-success').should('contain', 'Movimentação removida com sucesso!')

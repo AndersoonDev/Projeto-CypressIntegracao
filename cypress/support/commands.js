@@ -41,6 +41,12 @@ Cypress.Commands.add('login', (email, senha) => {
     cy.get(loc.MESSAGE).should('contain', 'Bem vindo, Anderson Silva!')
 });
 
+Cypress.Commands.add('acessarMenuConta', () => {
+    cy.get(loc.MENU.HOME).click()
+    cy.get(loc.MENU.SETTINGS).click()
+    cy.get(loc.MENU.CONTAS).click()
+  });
+
 Cypress.Commands.add('resetApp', () => {
     cy.get(loc.MENU.SETTINGS).click()
     cy.get(loc.MENU.RESET).click()
