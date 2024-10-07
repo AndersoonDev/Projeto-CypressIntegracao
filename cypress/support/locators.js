@@ -17,7 +17,9 @@ const locators = {
     CONTAS: {
         NOME: '[data-test="nome"]',
         BTN_SALVAR: '.btn',
+        MSG_ERROR: '.toast-error > .toast-message',
         MSG_SUCESSO: '.toast-success > .toast-message',
+        
         XP_BTN_ALTERAR: nome => `//table//td[contains(., "${nome}")]/..//i[@class="far fa-edit"]`,
         XP_BTN_EXCLUIR: nome => `//table//td[contains(., "${nome}")]/..//i[@class="far fa-trash-alt"]`
     },
