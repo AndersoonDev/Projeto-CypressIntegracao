@@ -8,7 +8,7 @@ describe('Deve ter a nivel funcional', () => {
     });
     
 
-    it('Deve inserir uma conta', () => {
+    it.only('Deve inserir uma conta', () => {
         cy.resetApp()
         cy.get(loc.MENU.HOME).click()
         cy.get(loc.MENU.SETTINGS).click()
@@ -55,7 +55,6 @@ describe('Deve ter a nivel funcional', () => {
         cy.xpath(loc.SALDO.FN_XP_SALDO_CONTA('Conta para saldo')).should('contain', '534')
         cy.get('[data-test="menu-extrato"]').click()
         cy.xpath('//span[contains(.,"Movimentacao 1, calculo saldo")]/../../..//i[@class="fas fa-edit"]').click()
-        // cy.wait(1000)
         cy.get(loc.MOVIMENTACAO.DESCRICAO).should('have.value', 'Movimentacao 1, calculo saldo')
         cy.get('[data-test="status"]').click()
         cy.get('.btn-primary').click()
