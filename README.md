@@ -18,6 +18,7 @@
 - **Node.js:** Ambiente de execução para JavaScript no lado do servidor.
 - **GitHub Actions:** Utilizado para configurar pipelines de integração contínua (CI), executando os testes automaticamente a cada novo commit.
 - **Mochawesome:** Biblioteca de geração de relatórios em HTML para os testes automatizados.
+- **Day.js:** Biblioteca para manipulação de datas, utilizada nos testes para configurar datas de transações e pagamentos de forma simples.
 
 ## Cenários Testados 
 **Os cenários foram organizados em três categorias: Caminho feliz, fluxos alternativos e negativos, garantindo uma cobertura de testes ampla para diferentes situações de uso.**
