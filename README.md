@@ -20,7 +20,7 @@
 ## Cenários Testados 
 **Os cenários foram organizados em três categorias: Caminho feliz, fluxos alternativos e negativos, garantindo uma cobertura de testes ampla para diferentes situações de uso.**
 
-## Funcionalidade: Backend, Frontend, Funcional.
+## Funcionalidades: Backend, Frontend, Funcional.
 
 **1. Gerenciamento de Contas:**
 - Inserção de novas contas.
@@ -52,6 +52,44 @@
 
 - Verificação da visibilidade de elementos em diferentes tamanhos de tela (dispositivos móveis e tablets).
 
+
+## Instalação e Configuração
+
+1. Clone o repositório:
+``` bash
+git clone https://github.com/AndersoonDev/Projeto-CypressIntegracao.git
+```
+2. Acesse a pasta do projeto:
+``` bash
+cd seu-projeto
+```
+3. Instale as dependências:
+``` bash
+npm install
+```
+## Como Executar os Testes
+1. Para rodar os testes em modo interativo:
+``` bash
+npx cypress open
+```
+2. Para rodar os testes em modo headless (no terminal):
+``` bash
+npx cypress run
+```
+
+## Arquivos de Suporte e Fixação
+
+- **fixtures/:**  Armazena dados fixos em arquivos JSON, que são usados para simular inputs e facilitar testes com dados repetitivos.
+
+- **support/commands.js:**  Define comandos customizados do Cypress, como **cy.getToken()** para simplificar a autenticação em múltiplos testes.
+
+- **support/locators.js:**  Define comandos customizados do Cypress, como **cy.get(loc.MENU.HOME)** ,ajudam a manter o código mais limpo e legível e reutilizar em múltiplos testes.
+
+## Relatórios de Teste
+Os relatórios dos testes são gerados utilizando Mochawesome e estão disponíveis na pasta **reports/html/index.html**. Esses relatórios incluem uma visão detalhada de cada execução, com status de sucesso ou falha para cada teste.
+
+## CI/CD com GitHub Actions
+Este projeto utiliza **GitHub Actions** para executar os testes automaticamente a cada novo push. O arquivo de configuração **(.github/workflows/cypress-ci.yml)** define as etapas para instalação das dependências, execução dos testes e geração dos relatórios.
 
 ## Licença
 Este projeto está licenciado sob a MIT License.
