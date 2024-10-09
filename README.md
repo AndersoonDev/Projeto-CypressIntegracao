@@ -7,7 +7,8 @@
 **Neste projeto, foi aplicada a ferramenta Cypress para automatizar testes de uma aplicação web, cobrindo testes funcionais, de API e de interface. Através da prática, foi possível aprofundar conhecimentos em automação de testes, gerenciamento de dados e virtualização de requisições, garantindo a qualidade e a confiabilidade da aplicação.**
 
 **BarrigaReact**: https://barrigareact.wcaquino.me/ e http://barrigarest.wcaquino.me (API Rest)
-**Conhecimento adquirido neste curso: https://www.udemy.com/course/testes-cypress**
+
+**Habilidades adquiridas em: https://www.udemy.com/course/testes-cypress**
 
 ## Frameworks e Bibliotecas utilizados
 - **Cypress:** Ferramenta principal para automação de testes.
