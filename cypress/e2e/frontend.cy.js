@@ -216,7 +216,6 @@ describe('Deve ter a nivel funcional', () => {
         cy.xpath(loc.SALDO.FN_XP_SALDO_CONTA('Carteira')).should('contain', '100')
         cy.get(loc.MENU.EXTRATO).click()
         cy.xpath(loc.EXTRATO.FN_XP_EDITAR_ELEMENTO('Movimentacao 1, calculo saldo')).click()
-        // cy.xpath('//spn[contains(.,"Movimentacao 1, calculo saldo")]/../../..//i[@class="fas fa-edit"]').click()
         cy.get(loc.MOVIMENTACAO.DESCRICAO).should('have.value', 'Movimentacao 1, calculo saldo')
         cy.get(loc.MOVIMENTACAO.STATUS).click()
         cy.get(loc.MOVIMENTACAO.BTN_SALVAR).click()
@@ -339,16 +338,12 @@ describe('Deve ter a nivel funcional', () => {
                 "usuario_id": 51737,
                 "transferencia_id": null,
                 "parcelamento_id": null
-            }
-
-            ])
+            }]
+        )
         cy.get(loc.MENU.EXTRATO).click()
         cy.xpath(loc.EXTRATO.FN_XP_LINHA('Receitapaga')).should('have.class', 'receitaPaga')
         cy.xpath(loc.EXTRATO.FN_XP_LINHA('Receitapendente')).should('have.class', 'receitaPendente')
         cy.xpath(loc.EXTRATO.FN_XP_LINHA('Despesapaga')).should('have.class', 'despesaPaga')
         cy.xpath(loc.EXTRATO.FN_XP_LINHA('Despesapendente')).should('have.class', 'despesaPendente')
     });
-
-
-
 })

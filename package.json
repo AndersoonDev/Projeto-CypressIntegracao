@@ -1,5 +1,5 @@
 {
-  "name": "projeto-aplicacoes-modernas-cypress",
+  "name": "projeto-cypressIntegracao",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "cy:run": "cypress run"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anderson Silva",
   "license": "ISC",
   "description": "",
   "dependencies": {
@@ -16,6 +16,7 @@
     "dayjs": "^1.11.12"
   },
   "devDependencies": {
-    "cypress": "^13.13.1"
+    "cypress": "^13.13.1",
+    "cypress-mochawesome-reporter": "^3.8.2"
   }
 }

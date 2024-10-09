@@ -16,6 +16,7 @@ require('@cypress/xpath');
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import 'cypress-mochawesome-reporter/register';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -23,3 +24,4 @@ import './commands'
 Cypress.SelectorPlayground.defaults({
     selectorPriority: ['data-cy', 'data-test', 'data-testid', 'id', 'class', 'attributes', 'tag', 'data-qa', 'nth-child' ]
 })
+

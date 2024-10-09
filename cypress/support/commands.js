@@ -27,14 +27,14 @@
 import loc from '../support/locators'
 
 Cypress.Commands.add('clickAlert', (locator, message) => {
-    cy.get(locator).click() 
+    cy.get(locator).click()
     cy.on('window:alert', msg => {
-        expect(msg).to.be.equal(message)        
+        expect(msg).to.be.equal(message)
     })
 });
 
 Cypress.Commands.add('login', (email, senha) => {
-    cy.visit('https://barrigareact.wcaquino.me/')   
+    cy.visit('https://barrigareact.wcaquino.me/')
     cy.get(loc.LOGIN.USER).type(email)
     cy.get(loc.LOGIN.PASSWORD).type(senha)
     cy.get(loc.LOGIN.BTN_LOGIN).click()
@@ -45,7 +45,7 @@ Cypress.Commands.add('acessarMenuConta', () => {
     cy.get(loc.MENU.HOME).click()
     cy.get(loc.MENU.SETTINGS).click()
     cy.get(loc.MENU.CONTAS).click()
-  });
+});
 
 Cypress.Commands.add('resetApp', () => {
     cy.get(loc.MENU.SETTINGS).click()
@@ -70,42 +70,42 @@ Cypress.Commands.add('getToken', (user, password) => {
 
 Cypress.Commands.add('resetRest', () => {
     cy.getToken('anderson@teste.com.br', 'teste@teste')
-    .then(token => {
-        cy.request({
-            method: 'GET',
-            url: '/reset',
-            headers: {Authorization: `JWT ${token}`}
-        })
-    }).its('status').should('be.equal', 200)
+        .then(token => {
+            cy.request({
+                method: 'GET',
+                url: '/reset',
+                headers: { Authorization: `JWT ${token}` }
+            })
+        }).its('status').should('be.equal', 200)
 });
 
 Cypress.Commands.add('getContaByName', (name) => {
-   cy.getToken('anderson@teste.com.br', 'teste@teste')
-   .then(token => {
-        cy.request({
-            method: 'GET',
-            url: '/contas',
-            headers: {Authorization: `JWT ${token}`},
-            qs: {
-                nome: name
-            }
-        }).then(response => {
-            return response.body[0].id
+    cy.getToken('anderson@teste.com.br', 'teste@teste')
+        .then(token => {
+            cy.request({
+                method: 'GET',
+                url: '/contas',
+                headers: { Authorization: `JWT ${token}` },
+                qs: {
+                    nome: name
+                }
+            }).then(response => {
+                return response.body[0].id
+            })
         })
-    })
 
 });
 
 Cypress.Commands.overwrite('request', (originalFn, ...options) => {
-    if(options.length === 1) {
-        if(Cypress.env('token')) {
+    if (options.length === 1) {
+        if (Cypress.env('token')) {
             options[0].headers = {
-            Authorization: `JWT ${Cypress.env('token')}`
+                Authorization: `JWT ${Cypress.env('token')}`
             }
             // options[0].Authorization = `JWT ${Cypress.env('token')}` outra opção que funciona
         }
     }
     return originalFn(...options)
-}) 
+})
 
 
