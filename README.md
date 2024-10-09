@@ -17,7 +17,40 @@
 - **GitHub Actions:** Utilizado para configurar pipelines de integração contínua (CI), executando os testes automaticamente a cada novo commit.
 - **Mochawesome:** Biblioteca de geração de relatórios em HTML para os testes automatizados.
 
-## Cenários Testados
+## Cenários Testados 
+**Os cenários foram organizados em três categorias: Caminho feliz, fluxos alternativos e negativos, garantindo uma cobertura de testes ampla para diferentes situações de uso.**
+
+## Funcionalidade: Backend, Frontend, Funcional.
+
+**1. Gerenciamento de Contas:**
+- Inserção de novas contas.
+- Alteração do nome de contas existentes.
+- Exclusão de contas.
+
+**2. Movimentações Financeiras:**
+
+- Inserção de novas movimentações (despesas/receitas).
+- Atualização do status de movimentações.
+- Remoção de movimentações.
+
+**3. Verificação de Saldo:**
+
+- Consulta de saldo atualizado das contas.
+- Ajuste do saldo após alteração em movimentações.
+
+**4. Autenticação de Usuário:**
+
+- Login de usuário com credenciais válidas.
+- Validação de erros em tentativas de login.
+
+**5. Validação de Restrições:**
+
+- Erro ao tentar criar contas duplicadas.
+- Erro ao tentar salvar movimentações ou contas com dados inválidos.
+
+**6. Testes de Responsividade:**
+
+- Verificação da visibilidade de elementos em diferentes tamanhos de tela (dispositivos móveis e tablets).
 
 
 ## Licença

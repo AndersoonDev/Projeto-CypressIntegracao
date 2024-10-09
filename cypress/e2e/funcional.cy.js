@@ -27,7 +27,7 @@ describe('Deve ter a nivel funcional', () => {
         cy.get(loc.MESSAGE).should('contain', 'Conta atualizada com sucesso!')
     });
 
-    it('Deve criar uma conta com o mesmo nome', () => {
+    it('Deve exibir um erro ao criar uma conta com o mesmo nome', () => {
         cy.get(loc.MENU.SETTINGS).click()
         cy.get(loc.MENU.CONTAS).click()
         cy.get(loc.CONTAS.NOME).type('Conta mesmo nome')
@@ -69,7 +69,7 @@ describe('Deve ter a nivel funcional', () => {
         cy.get(loc.EXTRATO.MSG_SUCESSO).should('contain', 'Movimentação removida com sucesso!')
     });
 
-    it('Deve excluir uma conta', () => {
+    it('Deve excluir uma contaDeve excluir uma conta', () => {
         cy.get(loc.MENU.SETTINGS).click()
         cy.get(loc.MENU.CONTAS).click()
         cy.xpath(loc.CONTAS.XP_BTN_EXCLUIR('Conta alterada')).click()

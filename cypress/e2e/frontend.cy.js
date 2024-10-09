@@ -99,7 +99,7 @@ describe('Deve ter a nivel funcional', () => {
         cy.get(loc.MESSAGE).should('contain', 'Conta atualizada com sucesso!')
     });
 
-    it('Deve criar uma conta com o mesmo nome', () => {
+    it('Deve exebir um erro ao criar uma conta com o mesmo nome', () => {
 
         cy.intercept({
             method: 'POST',

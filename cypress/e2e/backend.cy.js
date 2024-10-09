@@ -38,7 +38,7 @@ describe('Deve ter a nivel funcional', () => {
             })
     });
 
-    it('Deve criar uma conta com o mesmo nome', () => {
+    it('Deve exibir um erro ao criar uma conta com o mesmo nome', () => {
         cy.request({
             method: 'POST',
             url: '/contas',
