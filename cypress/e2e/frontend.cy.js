@@ -1,7 +1,7 @@
 /// <reference types='cypress' />
 
-import loc from '../../support/locators'
-import buildEnv from '../../support/buildEnv';
+import loc from '../support/locators'
+import buildEnv from '../support/buildEnv';
 
 describe('Deve ter a nivel funcional', () => {
     after(() => {

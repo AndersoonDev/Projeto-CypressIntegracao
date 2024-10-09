@@ -1,4 +1,4 @@
-name: Cypress testing
+name: Cypress integração
 on: push
 jobs:
   cypress-run:
